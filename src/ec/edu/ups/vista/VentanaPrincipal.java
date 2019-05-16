@@ -2,6 +2,8 @@
 package ec.edu.ups.vista;
 
 import ec.edu.ups.controlador.ControladorCliente;
+import ec.edu.ups.controlador.ControladorDetalleFactura;
+import ec.edu.ups.controlador.ControladorFactura;
 import ec.edu.ups.controlador.ControladorProducto;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -10,17 +12,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     ControladorCliente controladorcliente;
     ControladorProducto controladorProducto;
+    ControladorDetalleFactura controladorDetalleFactura;
+    ControladorFactura controladorFactura;
     
-    private Locale localizacion;
+    static Locale localizacion;
     private ResourceBundle mensajes;
     
     public VentanaPrincipal() {
         initComponents();
         controladorcliente=new ControladorCliente();
         controladorProducto=new ControladorProducto();
+        controladorDetalleFactura=new ControladorDetalleFactura();
+        controladorFactura=new ControladorFactura();
         
         //System.out.println("localizacion por defecto: "+ Locale.getDefault().getLanguage());
-        localizacion =new Locale("en", "US");
+        localizacion =new Locale("es", "EC");
         Locale.setDefault(localizacion);
         //System.out.println("localizacion forzada: "+ Locale.getDefault().getLanguage());
         
@@ -33,11 +39,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     
     public void cambiarIdioma(){
     
-        mensajes=ResourceBundle.getBundle("ec.edu.ups.idiomas.mensajes",Locale.getDefault());
+        mensajes=ResourceBundle.getBundle("ec.edu.ups.idiomas.mensajes",localizacion);
         fileMenu.setText(mensajes.getString("menu.cliente"));
         productoMenu.setText(mensajes.getString("menu.producto"));
         facturaMenu.setText(mensajes.getString("menu.factura"));
         idiomaMenu.setText(mensajes.getString("menu.idioma"));
+        itemActualizar.setText(mensajes.getString("menu.item.actualizar"));
+        itemActualizarP.setText(mensajes.getString("menu.item.actualizar"));
+        itemBuscar.setText(mensajes.getString("menu.item.buscar"));
+        itemBuscarC.setText(mensajes.getString("menu.item.buscar"));
+        itemBuscarF.setText(mensajes.getString("menu.item.buscar"));
+        itemCrear.setText(mensajes.getString("menu.item.crear"));
+        itemCrearP.setText(mensajes.getString("menu.item.crear"));
+        itemCrearF.setText(mensajes.getString("menu.item.crear"));
+        itemEliminar.setText(mensajes.getString("menu.item.eliminar"));
+        ItemEliminarP.setText(mensajes.getString("menu.item.eliminar"));
+        itemEliminarF.setText(mensajes.getString("menu.item.eliminar"));
+        itemListar.setText(mensajes.getString("menu.item.listar"));
+        itemListarP.setText(mensajes.getString("menu.item.listar"));
+        itemListarF.setText(mensajes.getString("menu.item.listar"));
+        
     }
 
     
@@ -68,7 +89,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         facturaMenu = new javax.swing.JMenu();
         itemCrearF = new javax.swing.JMenuItem();
         itemBuscarF = new javax.swing.JMenuItem();
-        itemActualizarF = new javax.swing.JMenuItem();
         itemEliminarF = new javax.swing.JMenuItem();
         itemListarF = new javax.swing.JMenuItem();
         idiomaMenu = new javax.swing.JMenu();
@@ -178,6 +198,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         productoMenu.add(ItemEliminarP);
 
         itemListarP.setText("Listar");
+        itemListarP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemListarPActionPerformed(evt);
+            }
+        });
         productoMenu.add(itemListarP);
 
         menuBar.add(productoMenu);
@@ -185,18 +210,35 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         facturaMenu.setText("Factura");
 
         itemCrearF.setText("crear");
+        itemCrearF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCrearFActionPerformed(evt);
+            }
+        });
         facturaMenu.add(itemCrearF);
 
         itemBuscarF.setText("buscar");
+        itemBuscarF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemBuscarFActionPerformed(evt);
+            }
+        });
         facturaMenu.add(itemBuscarF);
 
-        itemActualizarF.setText("actualizar");
-        facturaMenu.add(itemActualizarF);
-
         itemEliminarF.setText("eliminar");
+        itemEliminarF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemEliminarFActionPerformed(evt);
+            }
+        });
         facturaMenu.add(itemEliminarF);
 
         itemListarF.setText("listar");
+        itemListarF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemListarFActionPerformed(evt);
+            }
+        });
         facturaMenu.add(itemListarF);
 
         menuBar.add(facturaMenu);
@@ -239,6 +281,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void itemEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEliminarActionPerformed
         VentanaEliminarCliente eliminar=new VentanaEliminarCliente(controladorcliente);
+        this.desktopPane.removeAll();
+        this.desktopPane.repaint();
         eliminar.setVisible(true);
         desktopPane.add(eliminar);
         setSize(eliminar.getWidth()+20,eliminar.getHeight()+70);
@@ -247,6 +291,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void itemCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCrearActionPerformed
        VentanaCrearCliente crear=new VentanaCrearCliente(controladorcliente);
+       this.desktopPane.removeAll();
+       this.desktopPane.repaint();
        crear.setVisible(true);
        desktopPane.add(crear);
        setSize(crear.getWidth()+20,crear.getHeight()+70);
@@ -254,6 +300,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void itemBuscarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemBuscarCActionPerformed
         VentanaLeerCliente leer=new VentanaLeerCliente(controladorcliente);
+        this.desktopPane.removeAll();
+        this.desktopPane.repaint();
         leer.setVisible(true);
         desktopPane.add(leer);
         setSize(leer.getWidth()+20,leer.getHeight()+70);
@@ -261,6 +309,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void itemActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemActualizarActionPerformed
        VentanaActualizarCliente actualizar=new VentanaActualizarCliente(controladorcliente);
+       this.desktopPane.removeAll();
+        this.desktopPane.repaint();
        actualizar.setVisible(true);
        desktopPane.add(actualizar);
        setSize(actualizar.getWidth()+20,actualizar.getHeight()+70);
@@ -268,6 +318,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void itemListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemListarActionPerformed
         VentanaListarCliente listar=new VentanaListarCliente(controladorcliente);
+        this.desktopPane.removeAll();
+        this.desktopPane.repaint();
         listar.setVisible(true);
         desktopPane.add(listar);
         setSize(listar.getWidth()+20,listar.getHeight()+70);
@@ -275,6 +327,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void itemCrearPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCrearPActionPerformed
         VentanaCrearProducto crear=new VentanaCrearProducto(controladorProducto);
+        this.desktopPane.removeAll();
+        this.desktopPane.repaint();
         crear.setVisible(true);
         desktopPane.add(crear);
         setSize(crear.getWidth()+20,crear.getHeight()+70);
@@ -282,6 +336,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void itemBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemBuscarActionPerformed
         VentanaLeerProducto leer=new VentanaLeerProducto(controladorProducto);
+        this.desktopPane.removeAll();
+        this.desktopPane.repaint();
         leer.setVisible(true);
         desktopPane.add(leer);
         setSize(leer.getWidth()+20,leer.getHeight()+70);
@@ -289,6 +345,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void itemActualizarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemActualizarPActionPerformed
         VentanaActualizarProducto actualizar=new VentanaActualizarProducto(controladorProducto);
+        this.desktopPane.removeAll();
+        this.desktopPane.repaint();
         actualizar.setVisible(true);
         desktopPane.add(actualizar);
         setSize(actualizar.getWidth()+20,actualizar.getHeight()+70);
@@ -296,6 +354,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void ItemEliminarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemEliminarPActionPerformed
         VentanaEliminarProducto eliminar=new VentanaEliminarProducto(controladorProducto);
+        this.desktopPane.removeAll();
+        this.desktopPane.repaint();
         eliminar.setVisible(true);
         desktopPane.add(eliminar);
         setSize(eliminar.getWidth()+20,eliminar.getHeight()+70);
@@ -313,6 +373,51 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         cambiarIdioma();
     }//GEN-LAST:event_itemInglesActionPerformed
 
+    private void itemCrearFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCrearFActionPerformed
+        VentanaFactura factura=new VentanaFactura(controladorcliente,controladorDetalleFactura,controladorFactura);
+        this.desktopPane.removeAll();
+        this.desktopPane.repaint();
+        factura.setVisible(true);
+        desktopPane.add(factura);
+        setSize(factura.getWidth()+20,factura.getHeight()+70);
+    }//GEN-LAST:event_itemCrearFActionPerformed
+
+    private void itemListarFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemListarFActionPerformed
+         VentanaListarFactura leer=new VentanaListarFactura( controladorFactura);
+        this.desktopPane.removeAll();
+        this.desktopPane.repaint();
+         leer.setVisible(true);
+        desktopPane.add(leer);
+        setSize(leer.getWidth()+20,leer.getHeight()+70);
+    }//GEN-LAST:event_itemListarFActionPerformed
+
+    private void itemListarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemListarPActionPerformed
+        VentanaListarProducto listarP=new VentanaListarProducto(controladorProducto);
+        this.desktopPane.removeAll();
+        this.desktopPane.repaint();
+        listarP.setVisible(true);
+        desktopPane.add(listarP);
+        setSize(listarP.getWidth()+20,listarP.getHeight()+70);
+    }//GEN-LAST:event_itemListarPActionPerformed
+
+    private void itemBuscarFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemBuscarFActionPerformed
+       VentanaLeerFactura leer=new VentanaLeerFactura( controladorFactura);
+       this.desktopPane.removeAll();
+        this.desktopPane.repaint();
+       leer.setVisible(true);
+       desktopPane.add(leer);
+       setSize(leer.getWidth()+20,leer.getHeight()+70);
+    }//GEN-LAST:event_itemBuscarFActionPerformed
+
+    private void itemEliminarFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEliminarFActionPerformed
+       VentanaEliminarFactura eliminar=new VentanaEliminarFactura(controladorFactura);
+       this.desktopPane.removeAll();
+        this.desktopPane.repaint();
+       eliminar.setVisible(true);
+       desktopPane.add(eliminar);
+       setSize(eliminar.getWidth()+20,eliminar.getHeight()+70);
+    }//GEN-LAST:event_itemEliminarFActionPerformed
+
     public static void main(String args[]) {
        
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -329,7 +434,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu idiomaMenu;
     private javax.swing.JMenuItem itemActualizar;
-    private javax.swing.JMenuItem itemActualizarF;
     private javax.swing.JMenuItem itemActualizarP;
     private javax.swing.JMenuItem itemBuscar;
     private javax.swing.JMenuItem itemBuscarC;

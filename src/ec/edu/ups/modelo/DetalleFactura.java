@@ -1,7 +1,5 @@
 package ec.edu.ups.modelo;
 
-import java.util.HashSet;
-import java.util.Set;
 
 public class DetalleFactura {
  
@@ -9,12 +7,8 @@ public class DetalleFactura {
     private int cantidadCompra;
     private double subTotal;
     private String descripcion;
-    private Set<Producto> lista;
-   
-
+    
     public DetalleFactura() {
-   
-        lista=new HashSet<>();
     }
 
     public int getCodigo() {
@@ -49,18 +43,12 @@ public class DetalleFactura {
         this.descripcion = descripcion;
     }
 
-    public Set<Producto> getLista() {
-        return lista;
-    }
-
-    public void setLista(Set<Producto> lista) {
-        this.lista = lista;
-    }
+   
 
     
     @Override
     public String toString() {
-        return "DetalleFactura{" + "codigo=" + codigo + ", cantidadCompra=" + cantidadCompra + ", subTotal=" + subTotal + ", descripcion=" + descripcion + ", lista=" + lista +  '}';
+        return "DetalleFactura{" + "codigo=" + codigo + ", cantidadCompra=" + cantidadCompra + ", subTotal=" + subTotal + ", descripcion=" + descripcion  +  '}';
     }
 
     @Override
