@@ -56,16 +56,13 @@ public class ControladorDetalleFactura {
     
     
     public void buscarProducto(int codigo){
+     
     
-        DetalleFactura detalleFactura=new DetalleFactura();
-        Producto producto= buscar.read(codigo);
-        detalleFactura.setDescripcion(producto.getNombre());
-        detalleFactura.setSubTotal(producto.getCosto());
-        detalleFactura.setCantidadCompra(producto.getCantidad());
-        
-        cread(detalleFactura);
-        
-    
+        Set<Producto> listan=buscar.getLista();
+        for (Producto producto : listan) {
+             System.out.println(producto);
+        }
+       
     }
     
 }

@@ -1,6 +1,6 @@
 package ec.edu.ups.controlador;
 
-import ec.edu.ups.modelo.DetalleFactura;
+
 import ec.edu.ups.modelo.Producto;
 import java.util.HashSet;
 import java.util.Set;
