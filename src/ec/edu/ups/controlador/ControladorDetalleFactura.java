@@ -10,15 +10,16 @@ public class ControladorDetalleFactura {
  
     private Set<DetalleFactura> lista;
     private int codigo;
-    ControladorProducto buscar;
+    ControladorProducto controladorProducto;
     DetalleFactura detalle;
-
+    
+    
     
 
     public ControladorDetalleFactura() {
     
         lista=new HashSet<>();
-        buscar=new ControladorProducto();
+        controladorProducto=new ControladorProducto();
         detalle=new DetalleFactura();
         codigo=1;
     }
@@ -34,35 +35,28 @@ public class ControladorDetalleFactura {
     
     public void cread(DetalleFactura factura){
     
-        factura.setCodigo(codigo);
+        factura.setCodigod(codigo);
         lista.add(factura);
         codigo++;
+        System.out.println(lista);
+    }
+    
+    public void llenarTabla(int codigo){
+    
+        detalle.setDescripcion(controladorProducto.read(codigo).getNombre());
+        detalle.setSubTotal(controladorProducto.read(codigo).getCosto());
+        cread(detalle);
     }
     
     public DetalleFactura read(int codigo){
     
         for (DetalleFactura factura : lista) {
             
-            if (factura.getCodigo()==codigo){
+            if (factura.getCodigod()==codigo){
             
                 return factura;
             }
         }
         return null;
     }
-    
-    
-   
-    
-    
-    public void buscarProducto(int codigo){
-     
-    
-        Set<Producto> listan=buscar.getLista();
-        for (Producto producto : listan) {
-             System.out.println(producto);
-        }
-       
-    }
-    
 }

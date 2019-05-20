@@ -40,7 +40,7 @@ public class VentanaEliminarCliente extends javax.swing.JInternalFrame {
         lblcodigo.setText(mensajes.getString("crear.lblingresar"));
         lblnombre.setText(mensajes.getString("crear.lblnombre"));
         lbltelefono.setText(mensajes.getString("crear.lbltelefono"));
-        btnEliminar.setText(mensajes.getString("menu.item.actualizar"));
+        btnEliminar.setText(mensajes.getString("menu.item.eliminar"));
         btnbuscar.setText(mensajes.getString("menu.item.buscar"));
         btncancelar.setText(mensajes.getString("crear.btncancelar"));
         

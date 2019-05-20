@@ -11,6 +11,8 @@ import ec.edu.ups.controlador.ControladorFactura;
 import ec.edu.ups.modelo.Cliente;
 import ec.edu.ups.modelo.DetalleFactura;
 import ec.edu.ups.modelo.Factura;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -31,11 +33,30 @@ public class VentanaEliminarFactura extends javax.swing.JInternalFrame {
     ControladorFactura controladorFactura;
     Cliente cliente;
     Set<DetalleFactura> lista;
+    private ResourceBundle mensajes;
+   private Locale localizacion;
     public VentanaEliminarFactura( ControladorFactura controladorFactura) {
-        initComponents();
         
+        initComponents();
+        this.mensajes=mensajes;
         this.controladorFactura=controladorFactura;
         txtCodigoFactura.setText(String.valueOf(controladorFactura.getCodigo()));
+        cambiarIdioma();
+    }
+    
+     public void cambiarIdioma(){
+    
+        mensajes= ResourceBundle.getBundle("ec.edu.ups.idiomas.mensajes",VentanaPrincipal.localizacion);
+        lbltelefono.setText(mensajes.getString("menu.factura"));
+        lblcedula.setText(mensajes.getString("crear.lblcedula"));
+        lbldireccion.setText(mensajes.getString("crear.lbldireccion"));
+        lblingresar.setText(mensajes.getString("crear.lblingresar"));
+        lblnombre.setText(mensajes.getString("crear.lblnombre"));
+        lbltelefono.setText(mensajes.getString("crear.lbltelefono"));
+        btnbuscar.setText(mensajes.getString("menu.item.buscar"));
+        btncancelar.setText(mensajes.getString("crear.btncancelar"));
+        btneliminar.setText(mensajes.getString("menu.item.eliminar"));
+        
     }
 
 
@@ -48,16 +69,16 @@ public class VentanaEliminarFactura extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lblelminarFactura = new javax.swing.JLabel();
+        lblnombre = new javax.swing.JLabel();
+        lbldireccion = new javax.swing.JLabel();
+        lbltelefono = new javax.swing.JLabel();
+        lblcedula = new javax.swing.JLabel();
         txtCedula = new javax.swing.JTextField();
         txtDireccion = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
+        lblcodigo = new javax.swing.JLabel();
         txtCodigoFactura = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblFactura = new javax.swing.JTable();
@@ -67,28 +88,28 @@ public class VentanaEliminarFactura extends javax.swing.JInternalFrame {
         txtSubtotal = new javax.swing.JTextField();
         txtIva = new javax.swing.JTextField();
         txtTotal = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
+        btnbuscar = new javax.swing.JButton();
+        btncancelar = new javax.swing.JButton();
+        lblingresar = new javax.swing.JLabel();
         txtCodigoProducto = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        btneliminar = new javax.swing.JButton();
 
         setClosable(true);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("Sistema de eliminanza facturizacion");
+        lblelminarFactura.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblelminarFactura.setText("Sistema de eliminanza facturizacion");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("Nombre:");
+        lblnombre.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblnombre.setText("Nombre:");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel3.setText("Direccion:");
+        lbldireccion.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbldireccion.setText("Direccion:");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("Telefono:");
+        lbltelefono.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbltelefono.setText("Telefono:");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel5.setText("CI/Ruc:");
+        lblcedula.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblcedula.setText("CI/Ruc:");
 
         txtCedula.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -102,8 +123,8 @@ public class VentanaEliminarFactura extends javax.swing.JInternalFrame {
 
         txtNombre.setEnabled(false);
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setText("codigo:");
+        lblcodigo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblcodigo.setText("codigo:");
 
         txtCodigoFactura.setEnabled(false);
 
@@ -143,24 +164,24 @@ public class VentanaEliminarFactura extends javax.swing.JInternalFrame {
 
         txtTotal.setEnabled(false);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnbuscar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnbuscar.setText("Buscar");
+        btnbuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnbuscarActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btncancelar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btncancelar.setText("Cancelar");
+        btncancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btncancelarActionPerformed(evt);
             }
         });
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel10.setText("Codigo Producto");
+        lblingresar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblingresar.setText("Codigo Producto");
 
         txtCodigoProducto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -168,11 +189,11 @@ public class VentanaEliminarFactura extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton3.setText("Eliminar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btneliminar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btneliminar.setText("Eliminar");
+        btneliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btneliminarActionPerformed(evt);
             }
         });
 
@@ -184,44 +205,44 @@ public class VentanaEliminarFactura extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(123, 123, 123)
-                        .addComponent(jLabel1)
+                        .addComponent(lblelminarFactura)
                         .addGap(138, 138, 138)
-                        .addComponent(jLabel6)
+                        .addComponent(lblcodigo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtCodigoFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
+                                .addComponent(lbldireccion)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
+                                .addComponent(lblcedula)
                                 .addGap(33, 33, 33)
                                 .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblingresar, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtCodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
+                                .addComponent(lbltelefono)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
+                                .addComponent(lblnombre)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(90, 90, 90)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -244,30 +265,30 @@ public class VentanaEliminarFactura extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addComponent(lblelminarFactura)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6)
+                        .addComponent(lblcodigo)
                         .addComponent(txtCodigoFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4)
+                        .addComponent(lbltelefono)
                         .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel5)
+                        .addComponent(lblcedula)
                         .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(jLabel2)
+                        .addComponent(lbldireccion)
+                        .addComponent(lblnombre)
                         .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 8, Short.MAX_VALUE)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblingresar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtCodigoProducto)
                         .addGap(1, 1, 1)))
@@ -289,9 +310,9 @@ public class VentanaEliminarFactura extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
 
@@ -318,7 +339,7 @@ public class VentanaEliminarFactura extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtCodigoProductoKeyPressed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
         
          codigo=Integer.parseInt(txtCodigoFactura.getText());
          Factura factura=controladorFactura.read(codigo);
@@ -330,13 +351,13 @@ public class VentanaEliminarFactura extends javax.swing.JInternalFrame {
          txtTelefono.setText(factura.getCliente().getTelefono());
          txtTotal.setText(String.valueOf(factura.getTotal()));
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnbuscarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
        this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btncancelarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
     
         codigo=Integer.parseInt(txtCodigoFactura.getText());
         controladorFactura.delete(codigo);
@@ -348,20 +369,20 @@ public class VentanaEliminarFactura extends javax.swing.JInternalFrame {
          txtSubtotal.setText("");
          txtTelefono.setText("");
          txtTotal.setText("");
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btneliminarActionPerformed
     
     public void llenarTabla(){
         
         double iva,subtotal,total;
         
-        controladorDetalle.buscarProducto(codigo);
+       // controladorDetalle.buscarProducto(codigo);
         DefaultTableModel modelo= (DefaultTableModel)tblFactura.getModel();
         lista=controladorDetalle.getLista();
         for (DetalleFactura detalle : lista) {
             Object dato[]={
                 txtCodigoProducto.getText(),
                 detalle.getDescripcion(),
-                detalle.getCantidadCompra(),
+                
                 detalle.getSubTotal()
             };
             modelo.addRow(dato);
@@ -389,20 +410,20 @@ public class VentanaEliminarFactura extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JButton btnbuscar;
+    private javax.swing.JButton btncancelar;
+    private javax.swing.JButton btneliminar;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblcedula;
+    private javax.swing.JLabel lblcodigo;
+    private javax.swing.JLabel lbldireccion;
+    private javax.swing.JLabel lblelminarFactura;
+    private javax.swing.JLabel lblingresar;
+    private javax.swing.JLabel lblnombre;
+    private javax.swing.JLabel lbltelefono;
     private javax.swing.JTable tblFactura;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtCodigoFactura;

@@ -24,7 +24,7 @@ public class VentanaLeerCliente extends javax.swing.JInternalFrame {
          this.mensajes=mensajes;
         initComponents();
         this.controladorCliente=controladorCliente;
-        
+        cambiarIdioma();
     }
 
      public void cambiarIdioma(){

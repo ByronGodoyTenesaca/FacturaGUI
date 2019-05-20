@@ -3,29 +3,23 @@ package ec.edu.ups.modelo;
 
 public class DetalleFactura {
  
-    private int codigo;
-    private int cantidadCompra;
+    private int codigod;
     private double subTotal;
     private String descripcion;
     
     public DetalleFactura() {
     }
 
-    public int getCodigo() {
-        return codigo;
+
+    public int getCodigod() {
+        return codigod;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setCodigod(int codigo) {
+        this.codigod = codigo;
     }
 
-    public int getCantidadCompra() {
-        return cantidadCompra;
-    }
-
-    public void setCantidadCompra(int cantidadCompra) {
-        this.cantidadCompra = cantidadCompra;
-    }
+   
 
     public double getSubTotal() {
         return subTotal;
@@ -48,13 +42,13 @@ public class DetalleFactura {
     
     @Override
     public String toString() {
-        return "DetalleFactura{" + "codigo=" + codigo + ", cantidadCompra=" + cantidadCompra + ", subTotal=" + subTotal + ", descripcion=" + descripcion  +  '}';
+        return "DetalleFactura{" + "codigo=" + codigod + ", cantidadCompra="  + ", subTotal=" + subTotal + ", descripcion=" + descripcion  +  '}';
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 59 * hash + this.codigo;
+        hash = 59 * hash + this.codigod;
         return hash;
     }
 
@@ -70,7 +64,7 @@ public class DetalleFactura {
             return false;
         }
         final DetalleFactura other = (DetalleFactura) obj;
-        if (this.codigo != other.codigo) {
+        if (this.codigod != other.codigod) {
             return false;
         }
         return true;

@@ -7,6 +7,8 @@ package ec.edu.ups.vista;
 
 import ec.edu.ups.controlador.ControladorFactura;
 import ec.edu.ups.modelo.Factura;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Set;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,10 +23,20 @@ public class VentanaListarFactura extends javax.swing.JInternalFrame {
      */
     
     ControladorFactura controladorFactura;
+    private ResourceBundle mensajes;
+   private Locale localizacion;
     public VentanaListarFactura(ControladorFactura controladorFactura) {
         initComponents();
         this.controladorFactura=controladorFactura;
         llenarDatos();
+    }
+    
+     public void cambiarIdioma(){
+    
+        mensajes=ResourceBundle.getBundle("ec.edu.ups.idiomas.mensajes",Locale.getDefault());
+        lbllistar.setText(mensajes.getString("menu.item.listar"));
+        //lbldatos.setText(mensajes.getString("lblCantidada"));
+    
     }
     
     public void llenarDatos(){
@@ -38,7 +50,6 @@ public class VentanaListarFactura extends javax.swing.JInternalFrame {
                 factura.getCodigo(),
                 factura.getCliente().getNombre(),
                 factura.getDetalleFactura().getDescripcion(),
-                factura.getDetalleFactura().getCantidadCompra(), 
                 factura.getDetalleFactura().getSubTotal(),
                 factura.getIva(),
                 factura.getSubtotal(),
@@ -54,7 +65,7 @@ public class VentanaListarFactura extends javax.swing.JInternalFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCliente = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
+        lbllistar = new javax.swing.JLabel();
 
         setClosable(true);
 
@@ -77,8 +88,8 @@ public class VentanaListarFactura extends javax.swing.JInternalFrame {
         tblCliente.setRowHeight(40);
         jScrollPane1.setViewportView(tblCliente);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 3, 18)); // NOI18N
-        jLabel1.setText("LISTAR CLIENTES");
+        lbllistar.setFont(new java.awt.Font("Arial", 3, 18)); // NOI18N
+        lbllistar.setText("LISTAR FACTURAS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,13 +98,13 @@ public class VentanaListarFactura extends javax.swing.JInternalFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(308, 308, 308)
-                .addComponent(jLabel1)
-                .addContainerGap(320, Short.MAX_VALUE))
+                .addComponent(lbllistar)
+                .addContainerGap(310, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbllistar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(17, Short.MAX_VALUE))
@@ -104,8 +115,8 @@ public class VentanaListarFactura extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbllistar;
     private javax.swing.JTable tblCliente;
     // End of variables declaration//GEN-END:variables
 }

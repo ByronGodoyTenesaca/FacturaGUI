@@ -11,9 +11,14 @@ import ec.edu.ups.controlador.ControladorFactura;
 import ec.edu.ups.modelo.Cliente;
 import ec.edu.ups.modelo.DetalleFactura;
 import ec.edu.ups.modelo.Factura;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 
 
 /**
@@ -25,20 +30,43 @@ public class VentanaFactura extends javax.swing.JInternalFrame {
     /**
      * Creates new form VentanaFactura
      */
-    int codigo;
+   
     ControladorCliente controladorCliente;
     ControladorDetalleFactura controladorDetalle;
     ControladorFactura controladorFactura;
     Cliente cliente;
     Set<DetalleFactura> lista;
+    private ResourceBundle mensajes;
+   private Locale localizacion;
+   
+   
     public VentanaFactura(ControladorCliente controladorCliente, ControladorDetalleFactura controladorDetalle, ControladorFactura controladorFactura) {
+       this.mensajes=mensajes;
         initComponents();
         this.controladorCliente=controladorCliente;
         this.controladorDetalle=controladorDetalle;
         this.controladorFactura=controladorFactura;
         txtCodigoFactura.setText(String.valueOf(controladorFactura.getCodigo()));
+        fechaFactura();
+        cambiarIdioma();
     }
 
+   
+
+    public void cambiarIdioma(){
+    
+        mensajes= ResourceBundle.getBundle("ec.edu.ups.idiomas.mensajes",VentanaPrincipal.localizacion);
+        lblfacturizacion.setText(mensajes.getString("menu.factura"));
+        lblcedula.setText(mensajes.getString("crear.lblcedula"));
+        lbldireccion.setText(mensajes.getString("crear.lbldireccion"));
+        lblnombre.setText(mensajes.getString("crear.lblnombre"));
+        lbltelefono.setText(mensajes.getString("crear.lbltelefono"));
+        btnGuardar.setText(mensajes.getString("menu.item.crear"));
+        btncancelar.setText(mensajes.getString("crear.btncancelar"));
+        lblfecha.setText(mensajes.getString("item.fecha"));
+        lblcodigo.setText(mensajes.getString("cliente.codigo"));
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,16 +76,16 @@ public class VentanaFactura extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lblfacturizacion = new javax.swing.JLabel();
+        lblnombre = new javax.swing.JLabel();
+        lbldireccion = new javax.swing.JLabel();
+        lbltelefono = new javax.swing.JLabel();
+        lblcedula = new javax.swing.JLabel();
         txtCedula = new javax.swing.JTextField();
         txtDireccion = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
+        lblcodigo = new javax.swing.JLabel();
         txtCodigoFactura = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblFactura = new javax.swing.JTable();
@@ -67,55 +95,68 @@ public class VentanaFactura extends javax.swing.JInternalFrame {
         txtSubtotal = new javax.swing.JTextField();
         txtIva = new javax.swing.JTextField();
         txtTotal = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        txtCodigoProducto = new javax.swing.JTextField();
+        btnGuardar = new javax.swing.JButton();
+        btncancelar = new javax.swing.JButton();
+        lblfecha = new javax.swing.JLabel();
+        txtFecha = new javax.swing.JTextField();
 
         setClosable(true);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("Sistema de facturizacion");
+        lblfacturizacion.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblfacturizacion.setText("Sistema de facturizacion");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("Nombre:");
+        lblnombre.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblnombre.setText("Nombre:");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel3.setText("Direccion:");
+        lbldireccion.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbldireccion.setText("Direccion:");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("Telefono:");
+        lbltelefono.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbltelefono.setText("Telefono:");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel5.setText("CI/Ruc:");
+        lblcedula.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblcedula.setText("CI/Ruc:");
 
+        txtCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCedulaActionPerformed(evt);
+            }
+        });
         txtCedula.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCedulaKeyPressed(evt);
             }
         });
 
-        txtDireccion.setEnabled(false);
+        txtDireccion.setEditable(false);
 
-        txtTelefono.setEnabled(false);
+        txtTelefono.setEditable(false);
 
-        txtNombre.setEnabled(false);
+        txtNombre.setEditable(false);
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setText("codigo:");
+        lblcodigo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblcodigo.setText("codigo:");
 
         txtCodigoFactura.setEnabled(false);
 
         tblFactura.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Codigo", "Descripcion", "Cantidad", "Costo"
+                "Codigo", "Descripcion", "Cantidad", "Precio uni", "Precio Total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, true, false
+                true, false, true, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -142,30 +183,26 @@ public class VentanaFactura extends javax.swing.JInternalFrame {
 
         txtTotal.setEnabled(false);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton1.setText("Guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btncancelar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btncancelar.setText("Cancelar");
+        btncancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btncancelarActionPerformed(evt);
             }
         });
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel10.setText("Codigo Producto");
+        lblfecha.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblfecha.setText("Fecha:");
 
-        txtCodigoProducto.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtCodigoProductoKeyPressed(evt);
-            }
-        });
+        txtFecha.setEditable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -175,42 +212,43 @@ public class VentanaFactura extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(220, 220, 220)
-                        .addComponent(jLabel1)
+                        .addComponent(lblfacturizacion)
                         .addGap(41, 41, 41)
-                        .addComponent(jLabel6)
+                        .addComponent(lblcodigo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtCodigoFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
+                                .addComponent(lblcedula)
                                 .addGap(33, 33, 33)
                                 .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblfecha, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtFecha))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(lbldireccion)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
+                                .addComponent(lbltelefono)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
+                                .addComponent(lblnombre)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(90, 90, 90)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -233,34 +271,32 @@ public class VentanaFactura extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addComponent(lblfacturizacion)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6)
+                        .addComponent(lblcodigo)
                         .addComponent(txtCodigoFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4)
+                        .addComponent(lbltelefono)
                         .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel5)
+                        .addComponent(lblcedula)
                         .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(jLabel2)
+                        .addComponent(lbldireccion)
+                        .addComponent(lblnombre)
                         .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 4, Short.MAX_VALUE)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtCodigoProducto)
-                        .addGap(1, 1, 1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1))
+                    .addComponent(lblfecha, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -278,8 +314,8 @@ public class VentanaFactura extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
 
@@ -296,17 +332,12 @@ public class VentanaFactura extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtCedulaKeyPressed
 
     private void tblFacturaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblFacturaKeyPressed
-        
+        if (evt.getKeyCode()==10 ){
+        llenarTabla();
+        }
     }//GEN-LAST:event_tblFacturaKeyPressed
 
-    private void txtCodigoProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoProductoKeyPressed
-        if (evt.getKeyCode()==10){
-        
-            llenarTabla();
-        }
-    }//GEN-LAST:event_txtCodigoProductoKeyPressed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         
         Factura factura=new Factura();
         factura.setCliente(cliente);
@@ -315,9 +346,10 @@ public class VentanaFactura extends javax.swing.JInternalFrame {
         factura.setDetalleFactura((DetalleFactura) lista);
         factura.setSubtotal(Double.parseDouble(txtSubtotal.getText()));
         factura.setTotal(Double.parseDouble(txtTotal.getText()));
+        factura.setFecha(txtFecha.getText());
         
         controladorFactura.cread(factura);
-        JOptionPane.showMessageDialog(this, "la factura se creo correctamnete");
+        JOptionPane.showMessageDialog(this, "la factura guardo se creo correctamnete");
         
          txtCodigoFactura.setText(String.valueOf(controladorFactura.getCodigo()));
          txtCedula.setText("");
@@ -328,37 +360,28 @@ public class VentanaFactura extends javax.swing.JInternalFrame {
          txtTelefono.setText("");
          txtTotal.setText("");
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
        this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btncancelarActionPerformed
+
+    private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCedulaActionPerformed
+    
+    public void fechaFactura(){
+        Date fecha=new Date();
+        SimpleDateFormat fechaActual=new SimpleDateFormat("dd-MM-YYYY");
+       txtFecha.setText(fechaActual.format(fecha));
+    }
     
     public void llenarTabla(){
-        
-        double iva,subtotal,total;
-        
-        controladorDetalle.buscarProducto(codigo);
-        DefaultTableModel modelo= (DefaultTableModel)tblFactura.getModel();
-        lista=controladorDetalle.getLista();
-        for (DetalleFactura detalle : lista) {
-            Object dato[]={
-                txtCodigoProducto.getText(),
-                detalle.getDescripcion(),
-                detalle.getCantidadCompra(),
-                detalle.getSubTotal()
-            };
-            modelo.addRow(dato);
-            subtotal=detalle.getSubTotal()+Double.parseDouble(txtSubtotal.getText());
-            iva=subtotal*12/100;
-            total=subtotal+iva;
-            
-            txtSubtotal.setText(String.valueOf(subtotal));
-            txtIva.setText(String.valueOf(iva));
-            txtTotal.setText(String.valueOf(total));
-        }
+        System.out.println("llego");  
+        controladorDetalle.llenarTabla(1);
         
     }
+    
     public void llenarDatosF(){
     
        cliente=controladorCliente.readCI(txtCedula.getText());
@@ -373,24 +396,24 @@ public class VentanaFactura extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btncancelar;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblcedula;
+    private javax.swing.JLabel lblcodigo;
+    private javax.swing.JLabel lbldireccion;
+    private javax.swing.JLabel lblfacturizacion;
+    private javax.swing.JLabel lblfecha;
+    private javax.swing.JLabel lblnombre;
+    private javax.swing.JLabel lbltelefono;
     private javax.swing.JTable tblFactura;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtCodigoFactura;
-    private javax.swing.JTextField txtCodigoProducto;
     private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtIva;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtSubtotal;

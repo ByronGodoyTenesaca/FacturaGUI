@@ -9,6 +9,17 @@ public class Factura {
     private double iva;
     private double subtotal;
     private double total;
+    private String fecha;
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    
 
     public Factura() {
     }

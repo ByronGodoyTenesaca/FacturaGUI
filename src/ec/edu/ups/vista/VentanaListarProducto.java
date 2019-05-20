@@ -26,6 +26,8 @@ public class VentanaListarProducto extends javax.swing.JInternalFrame {
         llenarDatos();
     }
     
+    
+    
     public void llenarDatos(){
     
         DefaultTableModel modelo= (DefaultTableModel)tblProducto.getModel();
